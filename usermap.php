@@ -11,10 +11,9 @@ $apiKey = '5333a9720180356462a0d9615a38f6dfff4581aa';
 $apiUrl = 'https://mapon.com/api/v1/';
 $api = new MaponApi($apiKey, $apiUrl);
 
-$dataHandler = new dataHandler();
-
-$unitData = $dataHandler->getAllUnitData($api);
-print_r($unitData);
+$unitResult = $api->get('unit/list', array(
+    'units' => 0,
+));
 
 $carData = [];
 if(isset($_POST["submit"])){
@@ -97,5 +96,42 @@ if(isset($_POST["submit"])){
     </form>
     <div id="map"></div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp6jv3cOJMWA_iz292l4r075XhK5aXwp0&callback=initMap"></script>
+    <script>
+        function initMap(){
+            // Map options
+            var options = {
+                zoom:11,
+                center:{lat:57.52233, lng: 24.37825}
+            };
+            // New Map
+            var map = new google.maps.Map(document.getElementById('map'),options);
+
+            // Add marker
+            var start = new google.maps.Marker({
+                position:{lat:57.52233, lng: 24.37825},
+                map:map
+            });
+            var end = new google.maps.Marker({
+                position:{lat:57.50424, lng:25.55932},
+                map:map
+            });
+
+            var carCoordinates = [
+                <?php foreach($points as $coords){
+                    ?>{lat:<?php echo $coords["lat"];?>, lng:<?php echo $coords["lng"];?>},
+                <?}?>
+            ];
+
+            var route = new google.maps.Polyline({
+                path: carCoordinates,
+                geodesic: true,
+                strokeColor: "#e81a1a",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+            });
+
+            route.setMap(map);
+        }
+    </script>
 </body>
 </html>
