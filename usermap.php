@@ -1,6 +1,7 @@
 <?php
 use Mapon\MaponApi;
 include __DIR__ . '/vendor/autoload.php';
+include __DIR__ . '/autoloader.php';
 
 //Set timezone
 date_default_timezone_set('GMT');
@@ -10,15 +11,11 @@ $apiKey = '5333a9720180356462a0d9615a38f6dfff4581aa';
 $apiUrl = 'https://mapon.com/api/v1/';
 $api = new MaponApi($apiKey, $apiUrl);
 
-$unitResult = $api->get('unit/list', array(
-    'units' => 0,
-));
+$dataHandler = new dataHandler();
 
-//mysql://b71f20df94555f:8527f4eb@eu-cdbr-west-02.cleardb.net/heroku_d5d58245fb0f454?reconnect=true
+$unitData = $dataHandler->getAllUnitData($api);
+print_r($unit_data);
 
-//username: b71f20df94555f
-//pass: 8527f4eb
-//host: eu-cdbr-west-02.cleardb.net
 $carData = [];
 if(isset($_POST["submit"])){
     foreach($unitResult->data->units as $unit_id => $unit_data){

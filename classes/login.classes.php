@@ -3,7 +3,7 @@
 class Login extends Dbh {
 
     protected function getUser($uid, $pwd){
-        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?');
+        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?;');
 
         if(!$stmt->execute(array($uid, $pwd))){
             $stmt = null;
@@ -26,8 +26,7 @@ class Login extends Dbh {
             exit();
         }elseif($checkPwd == true){
             $stmt = $this->connect()->prepare('SELECT * FROM users WHERE users_uid = ? AND users_pwd = ?;');
-            echo "eda";
-            if(!$stmt->execute(array($uid, $pwd))){
+            if(!$stmt->execute(array($uid, $uid, $pwd))){
                 $stmt = null;
                 header("location: ../index.php?error=stmtfailed");
                 exit();
