@@ -14,7 +14,7 @@ $api = new MaponApi($apiKey, $apiUrl);
 $dataHandler = new dataHandler();
 
 $unitData = $dataHandler->getAllUnitData($api);
-print_r($unit_data);
+print_r($unitData);
 
 $carData = [];
 if(isset($_POST["submit"])){
