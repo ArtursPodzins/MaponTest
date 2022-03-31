@@ -3,11 +3,14 @@
 class Login extends Dbh {
 
     protected function getUser($uid, $pwd){
-        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?;');
+        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?');
 
         if(!$stmt->execute(array($uid, $pwd))){
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
+            exit();
+        }else{
+            header("location: ../index.php?error=stmtsucess");
             exit();
         }
 
