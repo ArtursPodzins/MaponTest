@@ -46,7 +46,6 @@ if(isset($_POST["submit"])){
             }
         }
     }
-    print_r($points);
 }
 
 ?>
@@ -66,7 +65,8 @@ if(isset($_POST["submit"])){
 
         #map {
             height: 500px;
-            width: 100%;
+            width: 70%;
+            border: solid 3px black;
         }
     </style>
 </head>
@@ -100,8 +100,8 @@ if(isset($_POST["submit"])){
         function initMap(){
             // Map options
             var options = {
-                zoom:11,
-                center:{lat:57.52233, lng: 24.37825}
+                zoom:8,
+                center:{lat:<?php echo $points[0]["lat"]?>, lng: <?php echo $points[0]["lng"]?>}
             };
             // New Map
             var map = new google.maps.Map(document.getElementById('map'),options);
