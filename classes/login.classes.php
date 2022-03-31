@@ -9,9 +9,6 @@ class Login extends Dbh {
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
             exit();
-        }else{
-            header("location: ../index.php?error=stmtsucess");
-            exit();
         }
 
         if($stmt->rowCount() == 0){
