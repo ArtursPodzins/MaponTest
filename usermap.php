@@ -112,13 +112,7 @@ if(isset($_POST["submit"])){
                 map:map
                 
             });
-
-            new google.maps.Marker({
-                position: map.getCenter(),
-                icon: svgMarker,
-                map: <?php echo $carData["icon"]?>,
-            });
-
+            
             var end = new google.maps.Marker({
                 position:{lat:57.50424, lng:25.55932},
                 map:map
