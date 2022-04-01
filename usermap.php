@@ -47,7 +47,7 @@ if(isset($_POST["submit"])){
         }
     }
 }
-
+print_r($points);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,7 +112,7 @@ if(isset($_POST["submit"])){
                 map:map
                 
             });
-            
+
             var end = new google.maps.Marker({
                 position:{lat:57.50424, lng:25.55932},
                 map:map
