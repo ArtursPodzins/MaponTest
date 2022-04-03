@@ -1,6 +1,6 @@
 <?php
 
-class LoginContr extends Login
+class loginContr extends Login
 {
 
     // Variables only used in this class
