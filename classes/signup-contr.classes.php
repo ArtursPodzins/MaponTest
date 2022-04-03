@@ -1,31 +1,44 @@
 <?php
 
-class SignupContr extends Signup {
+// Main signup class
+class SignupContr extends Signup 
+{
 
+    // Setting variables only for this class
     private $uid;
     private $pwd;
     private $pwdrepeat;
 
-    public function __construct($uid, $pwd, $pwdrepeat) {
+    // Giving variables above, value from form
+    public function __construct($uid, $pwd, $pwdrepeat) 
+    {
         $this->uid = $uid;
         $this->pwd = $pwd;
         $this->pwdrepeat = $pwdrepeat;
     }
 
-    public function signupUser(){
-        if($this->emptyInput() == false){
+    // Main signup function
+    public function signupUser()
+    {
+        // Checking if input is empty
+        if($this->emptyInput() == false)
+        {
             header("location: ../index.php?error=emptyinput");
             exit();
         }
-        if($this->invalidUid() == false){
+        // Checking if username is valid
+        if($this->invalidUid() == false)
+        {
             header("location: ../index.php?error=username");
             exit();
         }
-        if($this->uidTakenCheck() == false){
+        if($this->uidTakenCheck() == false)
+        {
             header("location: ../index.php?error=usertaken");
             exit();
         }
-        if($this->pwdMatch() == false){
+        if($this->pwdMatch() == false)
+        {
             header("location: ../index.php?error=passwordmatch");
             exit();
         }
