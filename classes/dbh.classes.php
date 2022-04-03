@@ -16,7 +16,7 @@ class Dbh
         $query_builder = TRUE;
 
         // Basic PDO connection to database
-        $dbh = new PDO("mysql:localhost=' . $host.'; dbname=' . $dbname.';", $user, $pwd);
+        $dbh = new PDO("mysql:host=" . $host."; dbname=" . $dbname.";", $user, $pwd);
         return $dbh;
         }
         catch (PDOException $e){
