@@ -32,7 +32,7 @@
 
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" name="pwd" class="form-control" placeholder="********" required/>
+                    <input type="password" name="pwd" class="form-control" placeholder="*******" required/>
                     <label class="form-label" for="loginPassword">Password</label>
                 </div>
 
