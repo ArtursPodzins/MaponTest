@@ -12,8 +12,6 @@ class Dbh
         $user = $cleardb_url["user"];
         $pwd = $cleardb_url["pass"];
         $dbname = substr($cleardb_url["path"],1);
-        $active_group = 'default';
-        $query_builder = TRUE;
 
         // Basic PDO connection to database
         $dbh = new PDO("mysql:host=" . $host."; dbname=" . $dbname.";", $user, $pwd);
