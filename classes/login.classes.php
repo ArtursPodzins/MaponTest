@@ -39,7 +39,7 @@ class Login extends Dbh{
             $stmt = $this->connect()->prepare('SELECT * FROM users WHERE users_uid = ? AND users_pwd = ?;');
 
             // Checking if the statement executed
-            if(!$stmt->execute(array($uid, $pwd)))
+            if(!$stmt->execute(array($uid, $uid, $pwd)))
             {
                 $stmt = null;
                 header("location: ../index.php?error=stmtfailed");
