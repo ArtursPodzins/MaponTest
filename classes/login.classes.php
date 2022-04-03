@@ -5,10 +5,10 @@ class Login extends Dbh{
     protected function getUser($uid, $pwd)
     {
         // Selecting password from the username that user gave
-        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?;');
+        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?');
 
         // Checking if the statement executed
-        if(!$stmt->execute(array($uid, $pwd)))
+        if(!$stmt->execute(array($uid, $uid)))
         {
             $stmt = null;
             header("location: ../index.php?error=stmtfailed");
@@ -25,7 +25,7 @@ class Login extends Dbh{
 
         // Fetching a hashed version of the password user gave
         $pwdHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $checkPwd = password_verify($pwd, $pwdHashed[0]["users_pwd"]);
+        $checkPwd = password_verify($pwd, $pwdHashed[0]['users_pwd']);
 
         // Checking if the password matches with database
         if($checkPwd == false)
@@ -39,7 +39,7 @@ class Login extends Dbh{
             $stmt = $this->connect()->prepare('SELECT * FROM users WHERE users_uid = ? AND users_pwd = ?;');
 
             // Checking if the statement executed
-            if(!$stmt->execute(array($uid, $uid, $pwd)))
+            if(!$stmt->execute(array($uid, $uid)))
             {
                 $stmt = null;
                 header("location: ../index.php?error=stmtfailed");

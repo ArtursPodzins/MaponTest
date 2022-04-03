@@ -54,7 +54,6 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript" src="javascript.js"></script>
     <title>Document</title>
     <style>
         *{
@@ -83,18 +82,18 @@ if(isset($_POST["submit"])){
             <br>
             <br>
             <span>Choose a time from:</span>
-            <input type="date" id="startDate" name="startDate" value="startDate" min="2013-01-01" max="2022.03.28">
+            <input type="date" id="startDate" name="startDate" value="startDate" min="2013-01-01" max="">
             <input type="time" id="startTime" name="startTime">
             <br>
             <span>Choose a time till:</span>
-            <input type="date" id="endDate" name="endDate" value="endDate" min="2013-01-01" max="2022.03.28">
+            <input type="date" id="endDate" name="endDate" value="endDate" min="2013-01-01" max="">
             <input type="time" id="endTime" name="endTime">
         </label>
         <br>
         <button type="submit" name="submit">Submit</button>
     </form>
     <div id="map"></div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDp6jv3cOJMWA_iz292l4r075XhK5aXwp0&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmqQlgXiUgVjdGxZQdkvzLQmkNc12pgKQ&callback=initMap"></script>
     <script>
         function initMap(){
             // Map options
@@ -120,7 +119,7 @@ if(isset($_POST["submit"])){
             var carCoordinates = [
                 <?php foreach($points as $coords){
                     ?>{lat:<?php echo $coords["lat"];?>, lng:<?php echo $coords["lng"];?>},
-                <?}?>
+                <?php }?>
             ];
 
             var route = new google.maps.Polyline({

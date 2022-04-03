@@ -5,6 +5,7 @@ class Dbh
     
     protected function connect()
     {
+        // Heroku database connection
         try{
         // Using heroku ClearDB for this project
         $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
@@ -21,6 +22,19 @@ class Dbh
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
         }
+
+        //Localhost connection for debugging
+
+        // try{
+        //     $username = "root";
+        //     $password = "";
+        //     $dbh = new PDO("mysql:host=localhost;dbname=maponlogin", $username, $password);
+        //     return $dbh;
+        // }
+        // catch(PDOException $e){
+        //     print "Error!: " . $e->getMessage() . "<br/>";
+        //     die();
+        // }
     }
 }
 
