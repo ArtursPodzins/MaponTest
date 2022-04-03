@@ -18,7 +18,7 @@ body{
 }
 
 #tab-login-btn{
-    border: 1px solid gray;
+    border: 1px solid rgb(199, 196, 196);
 }
 
 .register-wrapper{
@@ -38,5 +38,9 @@ body{
 }
 
 #tab-register-btn{
-    border: 1px solid gray;
+    border: 1px solid rgb(199, 196, 196);
+}
+
+#account-btn{
+    border: 1px solid rgb(199, 196, 196);
 }

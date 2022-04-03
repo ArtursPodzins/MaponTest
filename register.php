@@ -43,7 +43,10 @@
                 </div>
 
                 <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-block mb-3">Sign up</button>
+
+                <!-- Back to login button -->
+                <button onclick="window.location.href='index.php'" id="account-btn" class="btn btn-block mb-3">Already have an account?</button>
             </form>
         </div>
     </div>
