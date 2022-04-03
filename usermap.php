@@ -47,7 +47,6 @@ if(isset($_POST["submit"])){
         }
     }
 }
-print_r($points);
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -6,6 +6,8 @@ class Login extends Dbh{
     {
         // Selecting password from the username that user gave
         $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?;');
+        header("location: ../index.php?error=stmtfailed");
+            exit();
 
         // Checking if the statement executed
         if(!$stmt->execute(array($uid, $pwd)))
