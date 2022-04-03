@@ -11,7 +11,9 @@ class Dbh
         $host = $cleardb_url["host"];
         $user = $cleardb_url["user"];
         $pwd = $cleardb_url["pass"];
-        $dbname = "heroku_a74ac07097f08cb";
+        $dbname = substr($cleardb_url["path"],1);
+        $active_group = 'default';
+        $query_builder = TRUE;
 
         // Basic PDO connection to database
         $dbh = new PDO("mysql:host=' . $host.'; dbname=' . $dbname.';", $user, $pwd);
