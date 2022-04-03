@@ -8,9 +8,9 @@ if(isset($_POST["submit"]))
     $pwd = $_POST["pwd"];
     $pwdrepeat = $_POST["pwdrepeat"];
 
-    include "../.../dbh.classes.php";
-    include "../.../signup.classes.php";
-    include "../.../signup-contr.classes.php";
+    include "../classes/dbh.classes.php";
+    include "../classes/signup.classes.php";
+    include "../classes/signup-contr.classes.php";
     $signup = new SignupContr($uid, $pwd, $pwdrepeat);
 
     $signup->signupUser();
