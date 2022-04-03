@@ -23,7 +23,7 @@
 
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form method="post" action="includes/login.inc.php">
+            <form method="post" action="https://mapontest.herokuapp.com/includes/login.inc.php">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
                     <input type="text" name="uid" class="form-control" placeholder="Username..." required/>
