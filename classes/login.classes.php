@@ -1,6 +1,6 @@
 <?php
 // Main login class
-class Login extends Dbh {
+class Login extends Dbh{
 
     protected function getUser($uid, $pwd)
     {
