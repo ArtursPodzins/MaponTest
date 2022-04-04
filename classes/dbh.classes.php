@@ -24,7 +24,6 @@ class Dbh
         }
 
         //Localhost connection for debugging
-
         // try{
         //     $username = "root";
         //     $password = "";
