@@ -43,37 +43,43 @@ if(isset($_POST["submit"])){
     <title>Document</title>
 </head>
 <body>
-    <div class="btn-group">
-        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Large button
-        </button>
-        <ul class="dropdown-menu">
-            <li>
-                <button class="dropdown-item" name="carLabel" value="VW Crafter"><?php echo $carNumbers[0]?></button>
-            </li>
-        </ul>
-    </div>
     <form method="post">
+        <select class="form-select" aria-label="Default select example" name="carLabel">
+            <option selected>Select A Car</option>
+            <option value="VW Crafter"><?php echo $carNumbers[0] ?></option>
+            <option value="Volvo"><?php echo $carNumbers[1]?></option>
+            <option value="Golf car"><?php echo $carNumbers[2]?></option>
+        </select>
         <label>
-            
-            <br>
-            <span><?php echo $carNumbers[1]?></span>
-            <input type="checkbox" name="carLabel" value="Volvo">
-            <br>
-            <span><?php echo $carNumbers[2]?></span>
-            <input type="checkbox" name="carLabel" value="Golf car">
-            <br>
-            <br>
-            <span>Choose a time from:</span>
-            <input type="date" id="startDate" name="startDate" value="startDate" min="2013-01-01" max="">
-            <input type="time" id="startTime" name="startTime">
-            <br>
-            <span>Choose a time till:</span>
-            <input type="date" id="endDate" name="endDate" value="endDate" min="2013-01-01" max="">
-            <input type="time" id="endTime" name="endTime">
+            <div class="start-time-box">
+                <div class="select-time">
+                    <span>SELECT START TIME</span>
+                </div>
+                <br>
+                <div class="date-form">
+                    <input type="date" id="startDate" name="startDate" value="startDate" min="2013-01-01" max="" required>
+                </div>
+                <div class="time-form">
+                    <input type="time" id="startTime" name="startTime" required>
+                </div>
+            </div>
+            <div class="end-time-box">
+                <div class="select-time">
+                    <span>SELECT END TIME</span>
+                </div>
+                <br>
+                <div class="date-form">
+                    <input type="date" id="endDate" name="endDate" value="endDate" min="2013-01-01" max="" required>
+                </div>
+                <div class="time-form">
+                    <input type="time" id="endTime" name="endTime" required>
+                </div>
+            </div>
         </label>
         <br>
-        <button type="submit" name="submit">Submit</button>
+        <div class="submit-btn">
+            <button type="submit" name="submit" class="btn btn-primary btn-sm">GET ROUTE</button>
+        </div>
     </form>
     <div id="map"></div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmqQlgXiUgVjdGxZQdkvzLQmkNc12pgKQ&callback=initMap"></script>
