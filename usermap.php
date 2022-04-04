@@ -28,7 +28,6 @@ if(isset($_POST["submit"])){
     if(!empty($startDate) && !empty($endDate)){
         $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
     }
-
     $points = $carN->getRoutePoints($routeResult, $api);
 }
 ?>
@@ -82,13 +81,27 @@ if(isset($_POST["submit"])){
         </div>
     </form>
     <div id="map"></div>
+    <div class="route-data">
+        <h2>DATA ABOUT SELECTED ROUTE</h2>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                <th scope="col">Start time</th>
+                <th scope="col">End time</th>
+                <th scope="col">Address</th>
+                <th scope="col">Distance</th>
+                <th scope="col">Time spent</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmqQlgXiUgVjdGxZQdkvzLQmkNc12pgKQ&callback=initMap"></script>
     <script>
         function initMap(){
             <?php if(!empty($points)){?>
             // Map options
             var options = {
-                zoom:8,
+                zoom:10,
                 center:{lat:<?php echo $points[0]["lat"]?>, lng: <?php echo $points[0]["lng"]?>}
             };
             // New Map
@@ -96,7 +109,7 @@ if(isset($_POST["submit"])){
 
             // Add marker
             var start = new google.maps.Marker({
-                position:{lat:57.52233, lng: 24.37825},
+                position:{lat:<?php echo $points[0]["lat"]?>, lng: <?php echo $points[0]["lng"]?>},
                 map:map
                 
             });

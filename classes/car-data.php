@@ -39,7 +39,7 @@ class CarData {
             'from' => $startDate,
             'till' => $endDate,
             'units' => 0,
-            'unit_id' => $carData[0]->unit_id,
+            'unit_id' => 66466,//$carData[0]->unit_id,
             'include' => array('polyline', 'decoded_route')
         ));
 
