@@ -30,14 +30,9 @@ class LoginContr extends Login
     // Empty input function
     private function emptyInput() 
     {
-        $result = "";
-        if(empty($this->uid) || empty($this->pwd))
-        {
-            $result = false;
-        }else{
-            $result = true;
-        }
-        return $result;
+        if(empty($this->uid) || empty($this->pwd)){
+            return false;
+        }else return true;
     }
 
 }

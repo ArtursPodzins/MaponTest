@@ -11,8 +11,9 @@ $apiUrl = 'https://mapon.com/api/v1/';
 $api = new MaponApi($apiKey, $apiUrl);
 
 class CarData {
-
-    public function getUnitList($api){
+    // Getting unit list data
+    public function getUnitList($api)
+    {
         $unitResult = $api->get('unit/list', array(
             'units' => 0,
         ));
@@ -20,7 +21,9 @@ class CarData {
         return $unitResult;
     }
 
-    public function getCarNumbers ($unitResult){
+    // Getting car labels for selection
+    public function getCarNumbers ($unitResult)
+    {
         $carNumbers = [];
         foreach($unitResult->data->units as $unit_id => $unit_data){
             array_push($carNumbers, $unit_data->label);
@@ -29,7 +32,9 @@ class CarData {
         return $carNumbers;
     }
 
-    public function getRouteResult($api, $startDate, $endDate, $carData){
+    // Getting route list
+    public function getRouteResult($api, $startDate, $endDate, $carData)
+    {
         $routeResult = $api->get('route/list', array(
             'from' => $startDate,
             'till' => $endDate,
@@ -41,6 +46,7 @@ class CarData {
         return $routeResult;
     }
 
+    // Function that gets route lat and lng
     public function getRoutePoints($routeResult, $api){
         if(!empty($routeResult)){
             foreach($routeResult->data->units as $unit_id => $unit_data){

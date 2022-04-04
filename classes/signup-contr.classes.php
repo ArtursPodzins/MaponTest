@@ -32,11 +32,13 @@ class SignupContr extends Signup
             header("location: ../index.php?error=username");
             exit();
         }
+        // Checking if username is available
         if($this->uidTakenCheck() == false)
         {
             header("location: ../index.php?error=usertaken");
             exit();
         }
+        // Checking if passwords match
         if($this->pwdMatch() == false)
         {
             header("location: ../index.php?error=passwordmatch");
@@ -46,6 +48,7 @@ class SignupContr extends Signup
         $this->setUser($this->uid, $this->pwd);
     }
 
+    // Empty input function
     private function emptyInput() {
         $result = "";
         if(empty($this->uid) || empty($this->pwd) || empty($this->pwdrepeat)){
@@ -56,6 +59,7 @@ class SignupContr extends Signup
         return $result;
     }
 
+    // Invalid username function
     private function invalidUid(){
         $result = "";
         if(!preg_match("/^[a-zA-Z0-9]*$/", $this->uid)) {
@@ -66,6 +70,7 @@ class SignupContr extends Signup
         return $result;
     }
 
+    // Password checker function
     private function pwdMatch() {
         $result = "";
         if($this->pwd !== $this->pwdrepeat){
@@ -76,6 +81,7 @@ class SignupContr extends Signup
         return $result;
     }
 
+    // Function that checks if username is available
     private function uidTakenCheck() {
         $result = "";
         if(!$this->checkUser($this->uid)){

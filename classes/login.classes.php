@@ -5,7 +5,7 @@ class Login extends Dbh{
     protected function getUser($uid, $pwd)
     {
         // Selecting password from the username that user gave
-        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?');
+        $stmt = $this->connect()->prepare('SELECT users_pwd FROM users WHERE users_uid = ?;');
 
         // Checking if the statement executed
         if(!$stmt->execute(array($uid, $uid)))
@@ -61,10 +61,9 @@ class Login extends Dbh{
             session_start();
             $_SESSION["userid"] = $user[0]["users_id"];
             $_SESSION["useruid"] = $user[0]["users_uid"];
-
-            $stmt = null;
+            
         }
-
+        $stmt = null;
     }
 
 }
