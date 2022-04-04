@@ -1,7 +1,7 @@
 <?php
 use Mapon\MaponApi;
 include __DIR__ . '/vendor/autoload.php';
-include __DIR__ . '/autoloader.php';
+include __DIR__ . '/classes/car-data.php';
 
 //Set timezone
 date_default_timezone_set('GMT');
@@ -11,41 +11,25 @@ $apiKey = '5333a9720180356462a0d9615a38f6dfff4581aa';
 $apiUrl = 'https://mapon.com/api/v1/';
 $api = new MaponApi($apiKey, $apiUrl);
 
-$unitResult = $api->get('unit/list', array(
-    'units' => 0,
-));
+$carN = new CarData();
+$unitlist = $carN->getUnitList($api);
+$carNumbers = $carN->getCarNumbers($unitlist);
 
-$carData = [];
 if(isset($_POST["submit"])){
-    foreach($unitResult->data->units as $unit_id => $unit_data){
+    $carData = [];
+    foreach($unitlist->data->units as $unit_id => $unit_data){
         if($_POST["carLabel"] == $unit_data->label){
             array_push($carData, $unit_data);
         }
     }
-    if(isset($_POST)){
-        $startDate = $_POST["startDate"]."T".$_POST["startTime"].":00Z";
-        $endDate = $_POST["endDate"]."T".$_POST["endTime"].":00Z";
-    }
+    $startDate = $_POST["startDate"]."T".$_POST["startTime"].":00Z";
+    $endDate = $_POST["endDate"]."T".$_POST["endTime"].":00Z";
 
     if(!empty($startDate) && !empty($endDate)){
-        $routeResult = $api->get('route/list', array(
-            'from' => $startDate,
-            'till' => $endDate,
-            'units' => 0,
-            'unit_id' => $carData[0]->unit_id,
-            'include' => array('polyline', 'decoded_route')
-        ));
+        $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
     }
 
-    foreach($routeResult->data->units as $unit_id => $unit_data){
-        foreach ($unit_data->routes as $route) {
-            if ($route->type == 'route') {
-                if (isset($route->polyline)) {
-                    $points = $api->decodePolyline($route->polyline);
-                }
-            }
-        }
-    }
+    $points = $carN->getRoutePoints($routeResult, $api);
 }
 ?>
 <!DOCTYPE html>
@@ -54,30 +38,29 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/mapstyle.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Document</title>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            height: 500px;
-            width: 70%;
-            border: solid 3px black;
-        }
-    </style>
 </head>
 <body>
-    <form method="POST">
+    <div class="btn-group">
+        <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Large button
+        </button>
+        <ul class="dropdown-menu">
+            <li>
+                <button class="dropdown-item" name="carLabel" value="VW Crafter"><?php echo $carNumbers[0]?></button>
+            </li>
+        </ul>
+    </div>
+    <form method="post">
         <label>
-            <span>VW Crafter</span>
-            <input type="checkbox" name="carLabel" value="VW Crafter">
+            
             <br>
-            <span>Volvo</span>
+            <span><?php echo $carNumbers[1]?></span>
             <input type="checkbox" name="carLabel" value="Volvo">
             <br>
-            <span>Golf Car</span>
+            <span><?php echo $carNumbers[2]?></span>
             <input type="checkbox" name="carLabel" value="Golf car">
             <br>
             <br>
@@ -96,6 +79,7 @@ if(isset($_POST["submit"])){
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmqQlgXiUgVjdGxZQdkvzLQmkNc12pgKQ&callback=initMap"></script>
     <script>
         function initMap(){
+            <?php if(!empty($points)){?>
             // Map options
             var options = {
                 zoom:8,
@@ -129,7 +113,14 @@ if(isset($_POST["submit"])){
                 strokeOpacity: 1.0,
                 strokeWeight: 2,
             });
+            <?php }else{ ?>
+            var options = {
+                zoom:10,
+                center:{lat: 56.935008, lng: 24.141213}
+            };
 
+            var map = new google.maps.Map(document.getElementById('map'),options);
+            <?php } ?>
             route.setMap(map);
         }
     </script>

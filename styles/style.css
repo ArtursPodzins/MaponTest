@@ -1,5 +1,5 @@
 body{
-    background-image: url("background.png");
+    background-image: url("/images/background.png");
 }
 .wrapper{
     width: 550px;
@@ -43,4 +43,4 @@ body{
 
 #account-btn{
     border: 1px solid rgb(199, 196, 196);
-}
+}   

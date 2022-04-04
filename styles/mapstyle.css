@@ -1,0 +1,11 @@
+body{
+    display: flex;
+}
+#map {
+    position: relative;
+    height: 700px;
+    width: 900px;
+    border: solid 3px black;
+    margin-top: 100px;
+    left: 25%;
+}
