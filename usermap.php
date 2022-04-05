@@ -24,7 +24,6 @@ if(isset($_POST["submit"])){
     }
     $startDate = $_POST["startDate"]."T".$_POST["startTime"].":00Z";
     $endDate = $_POST["endDate"]."T".$_POST["endTime"].":00Z";
-
     if(!empty($startDate) && !empty($endDate)){
         $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
     }

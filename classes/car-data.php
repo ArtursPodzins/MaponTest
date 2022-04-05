@@ -47,11 +47,13 @@ class CarData {
     }
 
     public function getRouteId($routeResult){
+        $allRoutes = [];
         foreach($routeResult->data->units as $unit_id => $unit_data){
             foreach($unit_data->units as $unit_id => $route){
-                return $route;
+                array_push($allRoutes, $route);
             }
         }
+        return $allRoutes;
     }
 
     // Function that gets route lat and lng
