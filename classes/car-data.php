@@ -39,11 +39,19 @@ class CarData {
             'from' => $startDate,
             'till' => $endDate,
             'units' => 0,
-            'unit_id' => 66466,//$carData[0]->unit_id,
+            'unit_id' => $carData[0]->unit_id,
             'include' => array('polyline', 'decoded_route')
         ));
 
         return $routeResult;
+    }
+
+    public function getRouteId($routeResult){
+        foreach($routeResult->data->units as $unit_id => $unit_data){
+            foreach($unit_data->units as $unit_id => $route){
+                return $route;
+            }
+        }
     }
 
     // Function that gets route lat and lng

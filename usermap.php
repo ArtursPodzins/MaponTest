@@ -95,7 +95,6 @@ if(isset($_POST["submit"])){
             </thead>
         </table>
     </div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmqQlgXiUgVjdGxZQdkvzLQmkNc12pgKQ&callback=initMap"></script>
     <script>
         function initMap(){
             <?php if(!empty($points)){?>
@@ -143,5 +142,6 @@ if(isset($_POST["submit"])){
             route.setMap(map);
         }
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmqQlgXiUgVjdGxZQdkvzLQmkNc12pgKQ&callback=initMap"></script>
 </body>
 </html>
