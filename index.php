@@ -1,6 +1,7 @@
 <?php
 
 $request = $_SERVER['REQUEST_URI'];
+print_r($request);
 
 switch ($request) {
     case '/mapontest/' :
