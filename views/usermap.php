@@ -27,7 +27,12 @@ if(isset($_POST["submit"])){
     if(!empty($startDate) && !empty($endDate)){
         $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
     }
-    $points = $carN->getRoutePoints($routeResult, $api);
+    foreach($routeResult->data->units as $unit_id => $unit_data){
+        foreach($unit_data->unit_id as $unit_id){
+            print_r($unit_id);
+        }
+    }
+    //$points = $carN->getRoutePoints($routeResult, $api);
 }
 ?>
 <!DOCTYPE html>
