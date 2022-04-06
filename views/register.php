@@ -13,7 +13,7 @@
     <div class="register-wrapper">
         <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="tab-login-btn" data-mdb-toggle="pill" onclick="window.location.href='/'" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a>
+                <a class="nav-link" id="tab-login-btn" data-mdb-toggle="pill" onclick="window.location.href='login'" role="tab" aria-controls="pills-login" aria-selected="true">Login</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">Register</a>
@@ -46,7 +46,7 @@
                 <button type="submit" name="submit" class="btn btn-primary btn-block mb-3">Sign up</button>
 
                 <!-- Back to login button -->
-                <button onclick="window.location.href='index.php'" id="account-btn" class="btn btn-block mb-3">Already have an account?</button>
+                <button onclick="window.location.href='login'" id="account-btn" class="btn btn-block mb-3">Already have an account?</button>
             </form>
         </div>
     </div>

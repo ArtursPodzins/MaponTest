@@ -2,7 +2,7 @@
 
 $routes = [];
 
-function route($action, Closure $callback)
+function route($action, $callback)
 {
     global $routes;
 

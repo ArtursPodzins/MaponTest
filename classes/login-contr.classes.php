@@ -20,7 +20,7 @@ class LoginContr extends Login
         // Checking if the input is empty
         if($this->emptyInput() == false)
         {
-            header("location: ../index.php?error=emptyinput");
+            
             exit();
         }
 

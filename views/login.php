@@ -16,7 +16,7 @@
                 <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Login</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="tab-register-btn" data-mdb-toggle="pill" onclick="window.location.href='/register'" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">Register</a>
+                <a class="nav-link" id="tab-register-btn" data-mdb-toggle="pill" onclick="window.location.href='register'" role="tab" aria-controls="pills-register" aria-selected="false">Register</a>
             </li>
         </ul>
         <!-- Button navs -->

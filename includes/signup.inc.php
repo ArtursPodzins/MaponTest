@@ -15,5 +15,5 @@ if(isset($_POST["submit"]))
 
     $signup->signupUser();
 
-    header("location: ../usermap.php");
+    header("location: ../views/map.php");
 }

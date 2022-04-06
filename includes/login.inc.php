@@ -14,5 +14,5 @@ if(isset($_POST["submit"]))
 
     $login->loginUser();
 
-    header("location: ../usermap.php");
+    header("location: ../map.php");
 }
