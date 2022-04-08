@@ -1,5 +1,5 @@
 body{
-    background-image: url("/images/background.png");
+    background-image: url("/src/images/background.png");
 }
 .wrapper{
     width: 550px;

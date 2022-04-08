@@ -1,30 +1,25 @@
 <?php
 
-$request = $_SERVER['REQUEST_URI'];
+declare(strict_types=1);
 
-switch ($request) {
-    case '/mapontest/' :
-        require __DIR__ . '/views/login.php';
-        break;
-    case '/mapontest/login' :
-        require __DIR__ . '/views/login.php';
-        break;
-    case '/mapontest/register' :
-        require __DIR__ . '/views/register.php';
-        break;
-    // 2 Diffrent case sections, below is for heroku.com
-    case '/' :
-        require __DIR__ . '/views/login.php';
-        break;
-    case '/login' :
-        require __DIR__ . '/views/login.php';
-        break;
-    case '/register' :
-        require __DIR__ . '/views/register.php';
-        break;
-    default:
-        http_response_code(404);
-        require __DIR__ . '/views/404.php';
-        break;
-}
+require_once __DIR__ . '/vendor/autoload.php';
 
+use Mapon\Handler\Login;
+use Mapon\Handler\Register;
+use Mapon\Router;
+
+$router = new Router();
+
+$router->get('/', Login::class . '::execute');
+$router->post('/login', function(array $params = []){
+
+});
+
+$router->get('/register', Register::class . '::execute');
+$router->post('/success', Register::class . '::success');
+
+$router->addNotFoundHandler(function(){
+    require_once __DIR__ . '/src/views/404.html';
+});
+
+$router->run();
