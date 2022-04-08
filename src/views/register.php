@@ -28,7 +28,7 @@
 
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-            <form method="post" action="registering">
+            <form method="post" action="success">
                 <!-- Username input -->
                 <div class="form-outline mb-4">
                     <input type="text" name="uid" class="form-control" placeholder="Username..." required/>
