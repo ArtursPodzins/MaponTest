@@ -1,4 +1,5 @@
 <?php
+define(FILTER_SANITIZE_STRING, 513);
 
 require_once '../models/User.php';
 require_once '../helpers/session_helper.php';
@@ -52,10 +53,50 @@ class Users{
             die("Something went wrong");
         }
     }
+
+    public function login(){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data=[
+            'users_uid' => trim($_POST['uid']),
+            'users_pwd' => trim($_POST['pwd'])
+        ];
+
+        if(empty($data['uid']) || empty($data['pwd'])){
+            flash("login", "Please fill out all inputs");
+            header("location: ../views/login.php");
+            exit();
+        }
+
+        if($this->userModel->findUserByUsername($data['uid'])){
+            $loggedInUser = $this->userModel->login($data['uid'], $data['pwd']);
+            if($loggedInUser){
+                $this->createUserSession($loggedInUser);
+            }else{
+                flash("login", "Password Incorrect");
+                redirect("../views/login.php");
+            }
+        }else{
+            flash("login", "No user found");
+            redirect("../views/login.php");
+        }
+    }
+
+    public function createUserSession($user){
+        $_SESSION['users_uid'] = $user->users_uid;
+        redirect("../views/map.php");
+    }
 }
 
 $init = new Users;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $init->register();
+    switch($_POST['type']){
+        case 'register' :
+            $init->register();
+            break;
+        case 'login' :
+            $init->login();
+            break;
+    }
 }
