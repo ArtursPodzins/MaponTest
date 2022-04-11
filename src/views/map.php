@@ -93,7 +93,8 @@ if(isset($_POST["showRoute"])){
         <div class="submit-btn">
             <button type="submit" name="submit-route" class="btn btn-primary btn-sm">GET ROUTES</button>
         </div>
-        <?php if(!empty($routeIds) || !empty($_SESSION["carData"])){?>
+    </form>
+    <?php if(!empty($routeIds) || !empty($_SESSION["carData"])){?>
         <form method="post" class="select-route">
             <select name="routeId">
                 <option selected>Select Route</option>
@@ -105,7 +106,6 @@ if(isset($_POST["showRoute"])){
             <button type="submit" name="showRoute">SHOW ROUTE</button>
         </form>
     <?php } ?>
-    </form>
     <div id="map"></div>
     <div class="route-data">
         <h2>DATA ABOUT SELECTED ROUTE</h2>
