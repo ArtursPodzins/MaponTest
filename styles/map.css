@@ -26,11 +26,13 @@ body{
     box-shadow: 5px 10px 18px #888888;
 }
 
+.main-form{
+    height: 400px;
+}
 .form-select{
     margin-top: 50px;
     margin-left: 30px;
     width: 50px;
-    height: 400px;
 }
 
 .date-form{

@@ -56,7 +56,7 @@ if(isset($_POST["showRoute"])){
     <title>Document</title>
 </head>
 <body>
-    <form method="post">
+    <form method="post" class="main-form">
         <select class="form-select" aria-label="Default select example" name="carLabel">
             <option selected>Select A Car</option>
             <option value="VW Crafter"><?php echo $carNumbers[0] ?></option>
