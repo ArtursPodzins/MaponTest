@@ -70,10 +70,10 @@ if(isset($_POST["showRoute"])){
                 </div>
                 <br>
                 <div class="date-form">
-                    <input type="date" id="startDate" name="startDate" value="startDate" min="2016-01-01" max="" required>
+                    <input type="date" id="startDate" name="startDate" value="2022-03-01" min="2016-01-01" max="" required>
                 </div>
                 <div class="time-form">
-                    <input type="time" id="startTime" name="startTime" required>
+                    <input type="time" id="startTime" name="startTime" value="12:00" required>
                 </div>
             </div>
             <div class="end-time-box">
@@ -82,10 +82,10 @@ if(isset($_POST["showRoute"])){
                 </div>
                 <br>
                 <div class="date-form">
-                    <input type="date" id="endDate" name="endDate" value="endDate" min="2016-01-01" max="" required>
+                    <input type="date" id="endDate" name="endDate" value="2022-03-30" min="2016-01-01" max="" required>
                 </div>
                 <div class="time-form">
-                    <input type="time" id="endTime" name="endTime" required>
+                    <input type="time" id="endTime" name="endTime" value="12:00" required>
                 </div>
             </div>
         </label>
@@ -94,16 +94,18 @@ if(isset($_POST["showRoute"])){
             <button type="submit" name="submit-route" class="btn btn-primary btn-sm">GET ROUTES</button>
         </div>
     </form>
-    <?php if(!empty($routeIds) || !empty($_SESSION["carData"])){?>
-        <form method="post" class="select-route">
-            <select name="routeId">
-                <option selected>Select Route</option>
-                <?php 
-                foreach($routeIds as $routeId => $routeid){
-                    ?> <option value="<?php echo $routeid;?>"><?php echo "ID: ".$routeid ?></option>
-                <?php } ?>
-            </select>
-            <button type="submit" name="showRoute">SHOW ROUTE</button>
+    <?php if(!empty($routeIds)){?>
+        <form method="post">
+            <div class="route-box">
+                <select name="routeId">
+                    <option selected>Select Route</option>
+                    <?php 
+                    foreach($routeIds as $routeId => $routeid){
+                        ?> <option value="<?php echo $routeid;?>"><?php echo "ID: ".$routeid ?></option>
+                    <?php } ?>
+                </select>
+                <button type="submit" name="showRoute">SHOW ROUTE</button>
+            </div>
         </form>
     <?php } ?>
     <div id="map"></div>
