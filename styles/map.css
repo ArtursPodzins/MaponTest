@@ -76,4 +76,5 @@ body{
 .route-box{
     margin-top: 450px;
     left: 200px;
+    z-index: 2;
 }
