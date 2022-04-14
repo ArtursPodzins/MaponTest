@@ -97,4 +97,19 @@ class CarData {
 
         }
     }
+
+    public function getRouteData($routeResult, $api, $selectedId){
+        if(!empty($routeResult) && !empty($selectedId)){
+            foreach($routeResult->data->units as $unit_id => $unit_data){
+                foreach($unit_data->routes as $route){
+                    if($route->type == 'route'){
+                        if($selectedId == $route->route_id){
+                            $routeData = $route;
+                        }
+                    }
+                }
+            }
+        }
+        return $routeData;
+    }
 }

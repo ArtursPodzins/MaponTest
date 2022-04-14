@@ -55,6 +55,7 @@ if(isset($_POST["showRoute"])){
     $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
     $selectedId = $_POST["routeId"];
     $points = $carN->getRoutePointsById($selectedId, $routeResult, $api);
+    $routeData = $carN->getRouteData($routeResult, $api, $selectedId);
 }
 
 ?>
@@ -129,11 +130,23 @@ if(isset($_POST["showRoute"])){
                 <tr>
                 <th scope="col">Start time</th>
                 <th scope="col">End time</th>
-                <th scope="col">Address</th>
+                <th scope="col">Start Address</th>
+                <th scope="col">End Address</th>
                 <th scope="col">Distance</th>
                 <th scope="col">Time spent</th>
                 </tr>
             </thead>
+            <?php if(!empty($routeData)){?>
+                <tbody>
+                    <tr>
+                        <td><?php echo $routeData->start->time;?></td>
+                        <td><?php echo $routeData->end->time;?></td>
+                        <td><?php echo $routeData->start->address;?></td>
+                        <td><?php echo $routeData->end->address;?></td>
+                        <td><?php echo $routeData->end->distance;?></td>
+                    </tr>
+                </tbody>
+            <?php }?>
         </table>
     </div>
     <script>
