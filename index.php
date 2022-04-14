@@ -11,7 +11,7 @@ use Mapon\Router;
 $router = new Router();
 
 $router->get('/', Login::class . '::execute');
-$router->get('/login', Login::class . '::execute');
+$router->post('/login', Login::class . '::execute');
 
 $router->get('/register', Register::class . '::execute');
 $router->post('/success', Register::class . '::success');

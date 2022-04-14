@@ -18,6 +18,8 @@ $carNumbers = $carN->getCarNumbers($unitlist);
 
 if(isset($_POST["submit-route"])){
     $carData = [];
+    $allRoutes = [];
+    $fullRoute = [];
     foreach($unitlist->data->units as $unit_id => $unit_data){
         if($_POST["carLabel"] == $unit_data->label){
             array_push($carData, $unit_data);
@@ -29,11 +31,22 @@ if(isset($_POST["submit-route"])){
         $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
     }
     $routeIds = $carN->getRouteIds($routeResult, $api);
+    $routes = $carN->getFullRouteByTime($routeResult, $api);
+    foreach($routes as $route){
+        array_push($allRoutes, $route);
+    }
+    foreach($allRoutes as $route){
+        foreach($route as $coords){
+            array_push($fullRoute, $coords);
+        }
+    }
     $_SESSION["startDate"] = $startDate;
     $_SESSION["endDate"] = $endDate;
     $_SESSION["carData"] = $carData;
     $_SESSION["routeIds"] = $routeIds;
+    $_SESSION["fullRoute"] = $fullRoute;
 }
+
 if(isset($_POST["showRoute"])){
     $startDate = $_SESSION["startDate"];
     $endDate = $_SESSION["endDate"];
@@ -125,7 +138,35 @@ if(isset($_POST["showRoute"])){
     </div>
     <script>
         function initMap(){
-            <?php if(!empty($points)){
+            <?php if(!empty($fullRoute)){?>
+                var options = {
+                    zoom:10,
+                    center:{lat:<?php echo $fullRoute[0]["lat"]?>, lng: <?php echo $fullRoute[0]["lng"]?>}
+                };
+                // New Map
+                var map = new google.maps.Map(document.getElementById('map'),options);
+    
+                // Add marker
+                var start = new google.maps.Marker({
+                    position:{lat:<?php echo $fullRoute[0]["lat"]?>, lng: <?php echo $fullRoute[0]["lng"]?>},
+                    map:map
+                    
+                });
+    
+                var carCoordinates = [
+                    <?php foreach($fullRoute as $coords){
+                        ?>{lat:<?php echo $coords["lat"];?>, lng:<?php echo $coords["lng"];?>},
+                    <?php }?>
+                ];
+    
+                var route = new google.maps.Polyline({
+                    path: carCoordinates,
+                    geodesic: true,
+                    strokeColor: "#e81a1a",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2,
+                });
+            <?php }else if(!empty($points)){
             $last = count($points);?>
             // Map options
             var options = {

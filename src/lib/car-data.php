@@ -62,6 +62,23 @@ class CarData {
         }
     }
 
+    public function getFullRouteByTime($routeResult, $api){
+        $fullRoutePoints = [];
+        if(!empty($routeResult)){
+            foreach($routeResult->data->units as $unit_id => $unit_data){
+                foreach($unit_data->routes as $route){
+                    if($route->type == 'route'){
+                        if(isset($route->polyline)){
+                            $points = $api->decodePolyline($route->polyline);
+                            array_push($fullRoutePoints, $points);
+                        }
+                    }
+                }
+            }
+        }
+        return $fullRoutePoints;
+    }
+
     public function getRoutePointsById($selectedId, $routeResult, $api){
         if(!empty($routeResult) && !empty($selectedId)){
             foreach($routeResult->data->units as $unit_id => $unit_data){
