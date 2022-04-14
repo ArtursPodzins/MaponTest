@@ -74,7 +74,8 @@ body{
 }
 
 .route-box{
-    margin-top: 5px;
+    margin-top: 450px;
+    position:absolute;
     border: solid 3px rgb(158, 153, 153);
     border-radius: 10px;
     margin-left: 30px;
