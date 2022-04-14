@@ -72,12 +72,13 @@ if(isset($_POST["showRoute"])){
 </head>
 <body>
     <form method="post" class="main-form">
-        <select class="form-select" aria-label="Default select example" name="carLabel">
-            <option selected>Select A Car</option>
-            <option value="VW Crafter"><?php echo $carNumbers[0] ?></option>
-            <option value="Volvo"><?php echo $carNumbers[1]?></option>
-            <option value="Golf car"><?php echo $carNumbers[2]?></option>
-        </select>
+        <div class="car-select">
+            <input type="checkbox" name="carLabel" value="<?php echo $carNumbers[0] ?>">VW Crafter
+            <br>
+            <input type="checkbox" name="carLabel" value="<?php echo $carNumbers[1] ?>">Volvo
+            <br>
+            <input type="checkbox" name="carLabel" value="<?php echo $carNumbers[2] ?>">Golf Car
+        </div>
         <label>
             <div class="start-time-box">
                 <div class="select-time">
