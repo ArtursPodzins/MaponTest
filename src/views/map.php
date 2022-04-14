@@ -56,6 +56,7 @@ if(isset($_POST["showRoute"])){
     $selectedId = $_POST["routeId"];
     $points = $carN->getRoutePointsById($selectedId, $routeResult, $api);
     $routeData = $carN->getRouteData($routeResult, $api, $selectedId);
+    // print_r($routeData);
 }
 
 ?>
@@ -136,14 +137,26 @@ if(isset($_POST["showRoute"])){
                 <th scope="col">Time spent</th>
                 </tr>
             </thead>
-            <?php if(!empty($routeData)){?>
-                <tbody>
+            <?php if(!empty($routeData)){
+                $startTime = $routeData->start->time;
+                $startTime = str_replace("T", " ",$startTime);
+                $startTime = str_replace("Z", "",$startTime);
+                $endTIme = $routeData->end->time;
+                $endTime = str_replace("T", " ",$endTIme);
+                $endTime = str_replace("Z", "",$endTIme);
+                $startTS = strtotime($startTime);
+                $endTS = strtotime($endTIme);
+                ?><tbody>
                     <tr>
-                        <td><?php echo $routeData->start->time;?></td>
-                        <td><?php echo $routeData->end->time;?></td>
+                        <td><?php echo $startTime;?></td>
+                        <td><?php echo $endTime;?></td>
                         <td><?php echo $routeData->start->address;?></td>
                         <td><?php echo $routeData->end->address;?></td>
-                        <td><?php echo $routeData->end->distance;?></td>
+                        <td><?php if($routeData->distance < 1000){
+                            echo $routeData->distance."m";?>
+                        <?php }else{
+                            echo round($routeData->distance / 1000, 1)."km";}?></td>
+                        <td><?php echo round(abs($startTS - $endTS)/(60*60), 2). " hour(s)";?></td>
                     </tr>
                 </tbody>
             <?php }?>
