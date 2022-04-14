@@ -74,8 +74,8 @@ body{
 }
 
 .route-box{
-    margin-top: 50px;
+    margin-top: 60px;
     position:absolute;
-    margin-left: 200px;
+    margin-left: 220px;
     z-index: 2;
 }
