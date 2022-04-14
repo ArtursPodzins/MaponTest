@@ -10,11 +10,11 @@ use Mapon\Router;
 
 $router = new Router();
 
-$router->get('/mapontest/', Login::class . '::execute');
-$router->post('/mapontest/login', Login::class . '::execute');
+$router->get('/', Login::class . '::execute');
+$router->post('/login', Login::class . '::execute');
 
-$router->get('/mapontest/register', Register::class . '::execute');
-$router->post('/mapontest/success', Register::class . '::success');
+$router->get('/register', Register::class . '::execute');
+$router->post('/success', Register::class . '::success');
 
 $router->addNotFoundHandler(function(){
     require_once __DIR__ . '/src/views/404.html';
