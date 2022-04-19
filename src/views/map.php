@@ -19,10 +19,12 @@ $carNumbers = $carN->getCarNumbers($unitlist);
 if(isset($_POST["submit-route"])){
     $carData = [];
     $allRoutes = [];
-    $fullRoute = [];
+    $fullRoutes = [];
     foreach($unitlist->data->units as $unit_id => $unit_data){
-        if($_POST["carLabel"] == $unit_data->label){
-            array_push($carData, $unit_data);
+        foreach($_POST["carLabel"] as $label){
+            if($label == $unit_data->label){
+                array_push($carData, $unit_data);
+            }
         }
     }
     $startDate = $_POST["startDate"]."T".$_POST["startTime"].":00Z";
@@ -31,20 +33,20 @@ if(isset($_POST["submit-route"])){
         $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
     }
     $routeIds = $carN->getRouteIds($routeResult, $api);
-    $routes = $carN->getFullRouteByTime($routeResult, $api);
-    foreach($routes as $route){
-        array_push($allRoutes, $route);
-    }
-    foreach($allRoutes as $route){
-        foreach($route as $coords){
-            array_push($fullRoute, $coords);
-        }
-    }
+
+
+    //$routes = $carN->getFullRouteByTime($routeResult, $api);
+    // foreach($routes as $carRoutes){
+    //     array_push($allRoutes, $carRoutes);
+    // }
+    // foreach($allRoutes as $route){
+    //     array_push($fullRoutes, $route);
+    // }
     $_SESSION["startDate"] = $startDate;
     $_SESSION["endDate"] = $endDate;
     $_SESSION["carData"] = $carData;
     $_SESSION["routeIds"] = $routeIds;
-    $_SESSION["fullRoute"] = $fullRoute;
+    $_SESSION["fullRoutes"] = $fullRoutes;
 }
 
 if(isset($_POST["showRoute"])){
@@ -53,10 +55,9 @@ if(isset($_POST["showRoute"])){
     $carData = $_SESSION["carData"];
     $routeIds = $_SESSION["routeIds"];
     $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
-    $selectedId = $_POST["routeId"];
-    $points = $carN->getRoutePointsById($selectedId, $routeResult, $api);
+    //$selectedId = $_POST["routeId"];
+    //$points = $carN->getRoutePointsById($selectedId, $routeResult, $api);
     $routeData = $carN->getRouteData($routeResult, $api, $selectedId);
-    // print_r($routeData);
 }
 
 ?>
@@ -73,11 +74,11 @@ if(isset($_POST["showRoute"])){
 <body>
     <form method="post" class="main-form">
         <div class="car-select">
-            <input type="checkbox" name="carLabel" value="<?php echo $carNumbers[0] ?>">VW Crafter
+            <input type="checkbox" name="carLabel[]" value="<?php echo $carNumbers[0] ?>">VW Crafter
             <br>
-            <input type="checkbox" name="carLabel" value="<?php echo $carNumbers[1] ?>">Volvo
+            <input type="checkbox" name="carLabel[]" value="<?php echo $carNumbers[1] ?>">Volvo
             <br>
-            <input type="checkbox" name="carLabel" value="<?php echo $carNumbers[2] ?>">Golf Car
+            <input type="checkbox" name="carLabel[]" value="<?php echo $carNumbers[2] ?>">Golf Car
         </div>
         <label>
             <div class="start-time-box">
@@ -111,17 +112,21 @@ if(isset($_POST["showRoute"])){
         </div>
     </form>
     <?php if(!empty($routeIds)){?>
-        <form method="post">
-            <div class="route-box">
-                <select name="routeId">
-                    <option selected>Select Route</option>
-                    <?php 
-                    foreach($routeIds as $routeId => $routeid){
-                        ?> <option value="<?php echo $routeid;?>"><?php echo "ID: ".$routeid ?></option>
-                    <?php } ?>
-                </select>
-                <button type="submit" name="showRoute">SHOW ROUTE</button>
-            </div>
+        <form method="post"><?php
+            foreach($routeIds as $carRoutes){
+                foreach($carRoutes as $carRoute){?>
+                    <div class="Box">
+                        <select name="routeId">
+                            <option selected>Select Route</option>
+                            <?php
+                                foreach($carRoute as $routeId => $routeid){
+                                    ?> <option value="<?php echo $routeid;?>"><?php echo "ID: ".$routeid;?></option>
+                                <?php }?>
+                        </select>
+                    </div><?php
+                }
+            }?>
+            <button type="submit" name="showRoute">SHOW ROUTES</button>
         </form>
     <?php } ?>
     <div id="map"></div>
@@ -165,35 +170,7 @@ if(isset($_POST["showRoute"])){
     </div>
     <script>
         function initMap(){
-            <?php if(!empty($fullRoute)){?>
-                var options = {
-                    zoom:10,
-                    center:{lat:<?php echo $fullRoute[0]["lat"]?>, lng: <?php echo $fullRoute[0]["lng"]?>}
-                };
-                // New Map
-                var map = new google.maps.Map(document.getElementById('map'),options);
-    
-                // Add marker
-                var start = new google.maps.Marker({
-                    position:{lat:<?php echo $fullRoute[0]["lat"]?>, lng: <?php echo $fullRoute[0]["lng"]?>},
-                    map:map
-                    
-                });
-    
-                var carCoordinates = [
-                    <?php foreach($fullRoute as $coords){
-                        ?>{lat:<?php echo $coords["lat"];?>, lng:<?php echo $coords["lng"];?>},
-                    <?php }?>
-                ];
-    
-                var route = new google.maps.Polyline({
-                    path: carCoordinates,
-                    geodesic: true,
-                    strokeColor: "#e81a1a",
-                    strokeOpacity: 1.0,
-                    strokeWeight: 2,
-                });
-            <?php }else if(!empty($points)){
+            <?php if(!empty($points)){
             $last = count($points);?>
             // Map options
             var options = {
