@@ -2,10 +2,17 @@
 
 class Database
 {
-    private $host = "localhost";
-    private $user = "root";
-    private $pass = "";
-    private $dbName = "maponlogin";
+    // private $host = "localhost";
+    // private $user = "root";
+    // private $pass = "";
+    // private $dbName = "maponlogin";
+
+    private $user = "b196db408d4831";
+    private $host = "@eu-cdbr-west-02.cleardb.net";
+    private $pass = "acf3380b";
+    private $dbName = "heroku_a74ac07097f08cb";
+
+
 
     private $dbh;
     private $stmt;

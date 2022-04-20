@@ -1,8 +1,8 @@
 <?php
 define(FILTER_SANITIZE_STRING, 513);
 
-require_once '../models/User.php';
-require_once '../helpers/session_helper.php';
+require_once 'src/models/User.php';
+require_once 'src/helpers/session_helper.php';
 
 class Users{
     private $userModel;
@@ -24,31 +24,31 @@ class Users{
 
         if(empty($data['uid']) || empty($data['pwd']) || empty($data['pwdRepeat'])){
             flash("register", "Please fill out all inputs");
-            redirect("../views/register.php");
+            redirect("register");
         }
 
         if(!preg_match("/^[a-zA-Z0-9]*$/", $data['uid'])){
             flash("register", "Invalid username");
-            redirect("../views/register.php");
+            redirect("register");
         }
 
         if(strlen($data['pwd']) < 6){
             flash("register", "Invalid password");
-            redirect("../views/register.php");
+            redirect("register");
         }else if($data['pwd'] !== $data['pwdRepeat']){
             flash("register", "Passwords don't match");
-            redirect("../views/register.php");
+            redirect("register");
         }
 
         if($this->userModel->findUserByUsername($data['uid'])){
             flash("register", "Username already taken");
-            redirect("../views/register.php");
+            redirect("register");
         }
 
         $data['pwd'] = password_hash($data['pwd'], PASSWORD_DEFAULT);
 
         if($this->userModel->register($data)){
-            redirect("../views/login.php");
+            redirect("login");
         }else{
             die("Something went wrong");
         }

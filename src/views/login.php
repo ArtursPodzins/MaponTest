@@ -25,7 +25,7 @@
 
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form method="post" action="../controllers/Users.php">
+            <form method="post" action="submitted">
                 <input type="hidden" name="type" value="login">
                 <!-- Email input -->
                 <div class="form-outline mb-4">

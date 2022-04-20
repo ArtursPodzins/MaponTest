@@ -34,7 +34,6 @@ if(isset($_POST["submit-route"])){
     }
     $routeIds = $carN->getRouteIds($routeResult, $api);
 
-
     //$routes = $carN->getFullRouteByTime($routeResult, $api);
     // foreach($routes as $carRoutes){
     //     array_push($allRoutes, $carRoutes);
@@ -55,8 +54,8 @@ if(isset($_POST["showRoute"])){
     $carData = $_SESSION["carData"];
     $routeIds = $_SESSION["routeIds"];
     $routeResult = $carN->getRouteResult($api, $startDate, $endDate, $carData);
-    //$selectedId = $_POST["routeId"];
-    //$points = $carN->getRoutePointsById($selectedId, $routeResult, $api);
+    $selectedId = $_POST["routeId"];
+    $points = $carN->getRoutePointsById($selectedId, $routeResult, $api);
     $routeData = $carN->getRouteData($routeResult, $api, $selectedId);
 }
 
@@ -112,21 +111,16 @@ if(isset($_POST["showRoute"])){
         </div>
     </form>
     <?php if(!empty($routeIds)){?>
-        <form method="post"><?php
-            foreach($routeIds as $carRoutes){
-                foreach($carRoutes as $carRoute){?>
-                    <div class="Box">
-                        <select name="routeId">
-                            <option selected>Select Route</option>
-                            <?php
-                                foreach($carRoute as $routeId => $routeid){
-                                    ?> <option value="<?php echo $routeid;?>"><?php echo "ID: ".$routeid;?></option>
-                                <?php }?>
-                        </select>
-                    </div><?php
-                }
-            }?>
-            <button type="submit" name="showRoute">SHOW ROUTES</button>
+        <form method="post">
+            <div class="route-box">
+                <select name="routeId">
+                    <option selected>Select Route</option><?php
+                        foreach($routeIds as $routeId => $routeid){
+                            ?> <option value="<?php echo $routeid;?>"><?php echo "ID: ".$routeid;?></option><?php
+                        }?>
+                </select>
+                <button type="submit" name="showRoute">SHOW ROUTES</button>
+            </div>
         </form>
     <?php } ?>
     <div id="map"></div>

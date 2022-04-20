@@ -1,6 +1,6 @@
 <?php
 
-require_once '../lib/Database.php';
+require_once 'src/lib/Database.php';
 
 class User
 {

@@ -35,42 +35,25 @@ class CarData {
     // Getting route list
     public function getRouteResult($api, $startDate, $endDate, $carData)
     {
-        $carRouteData = [];
-        foreach($carData as $car){
             $routeResult = $api->get('route/list', array(
                 'from' => $startDate,
                 'till' => $endDate,
                 'units' => 0,
-                'unit_id' => $car->unit_id,
+                'unit_id' => $carData[0]->unit_id,
                 'include' => array('polyline', 'decoded_route')
             ));
-            array_push($carRouteData, $routeResult);
-        }
-        return $carRouteData;
+        
+        return $routeResult;
     }
 
     public function getRouteIds($routeResult, $api){
-        $routesIds = [
-            0 => [],
-            1 => [],
-            2 => []
-        ];
-        $routes = [];
-        $i = 0;
+        $routesIds = [];
         if(!empty($routeResult)){
-            foreach($routeResult as $carRoute){
-                foreach($carRoute->data->units as $unit_id => $unit_data){
-                    foreach ($unit_data->routes as $route) {
-                        if ($route->type == 'route') {
-                            array_push($routes, $route->route_id);
-                        }
+            foreach($routeResult->data->units as $unit_id => $unit_data){
+                foreach ($unit_data->routes as $route) {
+                    if ($route->type == 'route') {
+                        array_push($routesIds, $route->route_id);
                     }
-                    for($i == 0; $i < count($routesIds); $i++){
-                        if(empty($routesIds[$i])){
-                            array_push($routesIds[$i], $routes);
-                        }
-                    }
-                    
                 }
             }
             return $routesIds;
@@ -83,17 +66,15 @@ class CarData {
         $fullRoutePoints = [];
         $points = [];
         if(!empty($routeResult)){
-            foreach($routeResult as $carRoute){
-                foreach($carRoute->data->units as $unit_id => $unit_data){
-                    foreach($unit_data->routes as $route){
-                        if($route->type == 'route'){
-                            if(isset($route->polyline)){
-                                array_push($points,$api->decodePolyline($route->polyline));
-                            }
+            foreach($routeResult->data->units as $unit_id => $unit_data){
+                foreach($unit_data->routes as $route){
+                    if($route->type == 'route'){
+                        if(isset($route->polyline)){
+                            array_push($points,$api->decodePolyline($route->polyline));
                         }
                     }
-                    array_push($fullRoutePoints, $points);
                 }
+                array_push($fullRoutePoints, $points);
             }
         }
         return $fullRoutePoints;
