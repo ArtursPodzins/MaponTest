@@ -20,7 +20,7 @@ $router->post('/success', Login::class . '::success');
 $router->get('/register', Register::class . '::execute');
 $router->post('/submitted', Register::class . '::submitted');
 
-$router->get('/logout', Logout::class . '::logout');
+$router->post('/logout', Logout::class . '::logout');
 
 
 

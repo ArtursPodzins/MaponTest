@@ -80,9 +80,9 @@ if(isset($_POST["showRoute"])){
     <title>Document</title>
 </head>
 <body>
-    <form class="logout" action="logout"><?php
+    <form method="post" action="logout"><?php
         if(isset($_SESSION["users_uid"])){?>
-            <button type="button" class="btn btn-danger"><- LOGOUT</button><?php
+           <button type="submit" class="btn btn-outline-warning">LOGOUT</button><?php
         }?>
     </form>
     <form method="post" class="main-form">
