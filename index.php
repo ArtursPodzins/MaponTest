@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Mapon\Handler\Login;
+use Mapon\Handler\Logout;
 use Mapon\Handler\Register;
 use Mapon\Router;
 
@@ -18,6 +19,8 @@ $router->post('/success', Login::class . '::success');
 
 $router->get('/register', Register::class . '::execute');
 $router->post('/submitted', Register::class . '::submitted');
+
+$router->get('/logout', Logout::class . '::logout');
 
 
 

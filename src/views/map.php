@@ -80,6 +80,11 @@ if(isset($_POST["showRoute"])){
     <title>Document</title>
 </head>
 <body>
+    <form class="logout" action="logout"><?php
+        if(isset($_SESSION["users_uid"])){?>
+            <button type="button" class="btn btn-danger"><- LOGOUT</button><?php
+        }?>
+    </form>
     <form method="post" class="main-form">
         <div class="car-select">
             <input type="checkbox" name="carLabel[]" value="<?php echo $carNumbers[0] ?>">VW-Crafter
@@ -127,7 +132,7 @@ if(isset($_POST["showRoute"])){
                         }?>
                 </select>
                 <button type="submit" name="showRoute">SHOW ROUTE</button>
-                <button type="submit" name="showAllRoutes">SHOW ALL ROUTES</button>
+                <button type="submit" name="showAllRoutes">CLEAR ROUTES</button>
             </div>
         </form>
     <?php } ?>

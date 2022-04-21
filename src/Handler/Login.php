@@ -20,4 +20,5 @@ class Login
     {
         require_once __DIR__ . '/../views/map.php';
     }
+
 }
