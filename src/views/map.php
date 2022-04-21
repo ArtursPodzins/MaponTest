@@ -82,7 +82,9 @@ if(isset($_POST["showRoute"])){
 <body>
     <form method="post" action="logout"><?php
         if(isset($_SESSION["users_uid"])){?>
-           <button type="submit" class="btn btn-outline-warning">LOGOUT</button><?php
+            <div class="logout-btn">
+                <button type="submit" class="btn btn-outline-warning">LOGOUT</button>
+            </div><?php
         }?>
     </form>
     <form method="post" class="main-form">

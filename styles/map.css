@@ -79,3 +79,10 @@ body{
     margin-left: 220px;
     z-index: 2;
 }
+
+.logout-btn{
+    margin-left: 5px;
+    position: absolute;
+    margin-top: 5px;
+    z-index: 2;
+}
