@@ -71,14 +71,14 @@ class Users{
         ];
 
         // Checking if input isn't empty
-        if(empty($data['uid']) || empty($data['pwd'])){
+        if(empty($data['users_uid']) || empty($data['users_pwd'])){
             flash("login", "Please fill out all inputs");
             header("login");
             exit();
         }
 
-        if($this->userModel->findUserByUsername($data['uid'])){
-            $loggedInUser = $this->userModel->login($data['uid'], $data['pwd']);
+        if($this->userModel->findUserByUsername($data['users_uid'])){
+            $loggedInUser = $this->userModel->login($data['users_uid'], $data['users_pwd']);
             if($loggedInUser){
                 $this->createUserSession($loggedInUser);
             }else{
