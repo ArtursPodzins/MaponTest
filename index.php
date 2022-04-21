@@ -13,6 +13,7 @@ $router = new Router();
 $router->get('/', Login::class . '::execute');
 $router->post('/submitted', Login::class . '::submitted');
 $router->get('/login', Login::class . '::execute');
+$router->post('/success', Login::class . '::success');
 
 $router->get('/register', Register::class . '::execute');
 $router->post('/submitted', Register::class . '::submitted');
