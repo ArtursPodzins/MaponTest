@@ -21,6 +21,11 @@ body{
     border: 1px solid rgb(199, 196, 196);
 }
 
+.error-message{
+    font-family: 'Courier New', Courier, monospace;
+    color: red;
+}
+
 .register-wrapper{
     width: 550px;
     height: 450px;

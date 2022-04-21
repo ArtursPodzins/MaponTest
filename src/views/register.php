@@ -25,7 +25,9 @@
             </li>
         </ul>
         <!-- Button navs -->
-        <?php flash("register")?>
+        <div class="error-message">
+            <?php flash("register")?>
+        </div>
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
             <form method="post" action="submitted">
