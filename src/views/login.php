@@ -14,7 +14,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-    <?php flash("login")?>
 <section class="index-login">
     <div class="wrapper">
         <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -26,7 +25,7 @@
             </li>
         </ul>
         <!-- Button navs -->
-
+        <?php flash("login")?>
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
             <form method="post" action="submitted">

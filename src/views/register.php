@@ -15,7 +15,6 @@
 </head>
 <body>
 <section class="register">
-    <?php flash("register")?>
     <div class="register-wrapper">
         <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
             <li class="nav-item" role="presentation">
@@ -26,7 +25,7 @@
             </li>
         </ul>
         <!-- Button navs -->
-
+        <?php flash("register")?>
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
             <form method="post" action="submitted">
