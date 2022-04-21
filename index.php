@@ -11,14 +11,13 @@ use Mapon\Router;
 $router = new Router();
 
 $router->get('/', Login::class . '::execute');
-$router->post('/submitte', Login::class . '::submitte');
+$router->post('/submitted', Login::class . '::submitte');
 $router->get('/login', Login::class . '::execute');
-$router->post('/success', Login::class . '::success');
+$router->get('/success', Login::class . '::success');
 
 $router->get('/register', Register::class . '::execute');
 $router->post('/submitted', Register::class . '::submitted');
 
-$router->post('/success', Register::class . '::success');
 
 
 
