@@ -1,4 +1,7 @@
+<?php
+    include_once 'src/helpers/session_helper.php';
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,11 +28,11 @@
 
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form method="post" action="submitted">
+            <form method="post" action="success">
                 <input type="hidden" name="type" value="login">
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                    <input type="text" name="uid" class="form-control" placeholder="Username..."/>
+                    <input type="text" name="uid" class="form-control" placeholder="Username..." required/>
                     <label class="form-label" for="loginName">Username</label>
                 </div>
 

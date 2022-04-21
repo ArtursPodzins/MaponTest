@@ -32,7 +32,7 @@ class CarData {
         return $carNumbers;
     }
 
-    // Getting route list
+    //Getting route list for single car
     public function getRouteResult($api, $startDate, $endDate, $carData)
     {
             $routeResult = $api->get('route/list', array(
@@ -42,10 +42,28 @@ class CarData {
                 'unit_id' => $carData[0]->unit_id,
                 'include' => array('polyline', 'decoded_route')
             ));
-        
         return $routeResult;
     }
 
+    // Getting route list for all selected cars
+    public function getRouteResultAllCars($api, $startDate, $endDate, $carData)
+    {
+        $carRouteResult = [];
+        foreach($carData as $car){
+            $routeResult = $api->get('route/list', array(
+                'from' => $startDate,
+                'till' => $endDate,
+                'units' => 0,
+                'unit_id' => $car->unit_id,
+                'include' => array('polyline', 'decoded_route')
+            ));
+            array_push($carRouteResult, $routeResult);
+        }
+        
+        return $carRouteResult;
+    }
+
+    // Getting route ids
     public function getRouteIds($routeResult, $api){
         $routesIds = [];
         if(!empty($routeResult)){
@@ -62,6 +80,7 @@ class CarData {
         }
     }
 
+    // Getting Full Route Points
     public function getFullRouteByTime($routeResult, $api){
         $fullRoutePoints = [];
         $points = [];
@@ -74,12 +93,34 @@ class CarData {
                         }
                     }
                 }
+            }
+            array_push($fullRoutePoints, $points);
+        }
+        return $fullRoutePoints;
+    }
+
+    // Getting all cars route points
+    public function getCarsFullRoutesByTime($routeResults, $api){
+        $fullRoutePoints = [];
+        $points = [];
+        if(!empty($routeResults)){
+            foreach($routeResults as $carResult){
+                foreach($carResult->data->units as $unit_id => $unit_data){
+                    foreach($unit_data->routes as $route){
+                        if($route->type == 'route'){
+                            if(isset($route->polyline)){
+                                array_push($points,$api->decodePolyline($route->polyline));
+                            }
+                        }
+                    }
+                }
                 array_push($fullRoutePoints, $points);
             }
         }
         return $fullRoutePoints;
     }
 
+    // Getting specific route by selected id
     public function getRoutePointsById($selectedId, $routeResult, $api){
         if(!empty($routeResult) && !empty($selectedId)){
             foreach($routeResult->data->units as $unit_id => $unit_data){
@@ -99,6 +140,7 @@ class CarData {
         }
     }
 
+    // Getting selected route data
     public function getRouteData($routeResult, $api, $selectedId){
         if(!empty($routeResult) && !empty($selectedId)){
             foreach($routeResult->data->units as $unit_id => $unit_data){

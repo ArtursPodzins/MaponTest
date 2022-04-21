@@ -41,7 +41,6 @@ class Router
         $requestUri = parse_url($_SERVER['REQUEST_URI']);
         $requestPath = $requestUri['path'];
         $method = $_SERVER['REQUEST_METHOD'];
-
         $callback = null;
         foreach($this->handlers as $handler)
         {

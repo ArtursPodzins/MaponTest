@@ -3,7 +3,6 @@ define(FILTER_SANITIZE_STRING, 513);
 
 require_once 'src/models/User.php';
 require_once 'src/helpers/session_helper.php';
-
 class Users{
     private $userModel;
 
@@ -64,7 +63,7 @@ class Users{
 
         if(empty($data['uid']) || empty($data['pwd'])){
             flash("login", "Please fill out all inputs");
-            header("location: ../views/login.php");
+            header("login");
             exit();
         }
 
@@ -74,17 +73,17 @@ class Users{
                 $this->createUserSession($loggedInUser);
             }else{
                 flash("login", "Password Incorrect");
-                redirect("../views/login.php");
+                redirect("login");
             }
         }else{
             flash("login", "No user found");
-            redirect("../views/login.php");
+            redirect("login");
         }
     }
 
     public function createUserSession($user){
         $_SESSION['users_uid'] = $user->users_uid;
-        redirect("../views/map.php");
+        redirect("success");
     }
 }
 

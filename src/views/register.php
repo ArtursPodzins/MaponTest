@@ -44,7 +44,7 @@
 
                 <!-- Repeat Password input -->
                 <div class="form-outline mb-4">
-                    <input type="password" name="pwdrepeat" class="form-control" placeholder="********" required/>
+                    <input type="password" name="pwdRepeat" class="form-control" placeholder="********" required/>
                     <label class="form-label" for="registerRepeatPassword">Repeat password</label>
                 </div>
 

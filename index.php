@@ -10,15 +10,15 @@ use Mapon\Router;
 
 $router = new Router();
 
-$router->get('/', Login::class . '::execute');
-$router->post('/submitted', Login::class . '::submitted');
-$router->post('/login', Login::class . '::execute');
+$router->get('/mapontest/', Login::class . '::execute');
+$router->post('/mapontest/submitted', Login::class . '::submitted');
+$router->get('/mapontest/login', Login::class . '::execute');
 
-$router->get('/register', Register::class . '::execute');
-$router->post('/submitted', Register::class . '::submitted');
-$router->post('/success', Register::class . '::success');
+$router->get('/mapontest/register', Register::class . '::execute');
+$router->post('/mapontest/submitted', Register::class . '::submitted');
 
-$router->get('/views/register.php', Register::class . '::execute');
+$router->post('/mapontest/success', Register::class . '::success');
+
 
 
 
