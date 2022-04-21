@@ -30,7 +30,7 @@
         </div>
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-            <form method="post" action="submitted">
+            <form method="post" action="submitte">
                 <input type="hidden" name="type" value="login">
                 <!-- Email input -->
                 <div class="form-outline mb-4">

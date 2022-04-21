@@ -11,7 +11,7 @@ class Login
         require_once __DIR__ . '/../views/login.php';
     }
 
-    public function submitted(): void
+    public function submitte(): void
     {
         require_once __DIR__ . '/../controllers/Users.php';
     }
