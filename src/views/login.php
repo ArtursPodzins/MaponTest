@@ -26,7 +26,7 @@
         </ul>
         <!-- Button navs -->
         <div class="error-message">
-            <?php flash("login")?>
+            <span><?php flash("login")?></span>
         </div>
         <!-- Main content -->
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
